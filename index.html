@@ -1,3 +1,39 @@
-<form action="./foward.php">
-  <input type="submit" value="Open Script">
-</form>
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js">
+</script>
+<script>
+function ProcessSimpleCgi()
+{
+    param1Data = $("#param1").val();
+    param2Data = $("#param2").val();
+    params = "param1=" + param1Data + "&param2=" + param2Data;
+    $.ajax(
+    {
+        type: "POST",
+        url: "./search-and-fill.py",
+        data: params,
+        dataType: "html",
+    }).done(function() {
+      alert('finished python script');;
+    });
+}
+</script>
+</head>
+<body>
+    <div>
+        <span class="rowName">Number One: </span><input id="param1" type="text">
+    </div>
+    <div>
+        <span class="rowName">Number Two: </span><input id="param2" type="text">
+    </div>
+
+    <div><input type="button" value="Submit Query" onclick="ProcessSimpleCgi()"></div>
+
+    <ul id="paramsList"></ul>
+    <div id = "debug"></div>
+
+</body>
+
+</html>
